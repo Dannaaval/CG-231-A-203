@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Danna Betancourt/title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<script src="https://threejs.org/build/three.js"></script>
+		<script>
+			const scene = new THREE.Scene();
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+
+			const directionalLight=  new  THREE.directionalLight ( 0xccff00 , 1);
+			scene.add(  directionalLight );
+
+			const obj = [[1,1,1],[1.5,1.5,1.5],[,1.5,1.5,1.5]];
+		
+			var geometria = [];
+
+			for (let i=0; i<3; i++) {
+				geometria.push(new THREE.BoxGeometry(obj[i][0], obj[i][1],
+				obj[i][2]));
+			}
+
+			const color= [{ color: 0xccff00 } , { color: 0x800080 },{ color: 0x0000ff } ];
+			const material =[ new THREE.MeshBasicMaterial( color[0]),  new THREE.MeshBasicMaterial( color[1]), new THREE.MeshBasicMaterial( color[2]);]
+
+			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+			const material = new THREE.MeshBasicMaterial( { color: 0xccff00 } );
+			const cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );
+
+			const geometry1 = new THREE.BoxGeometry( 1, 1, 1 );
+			const material1 = new THREE.MeshBasicMaterial( { color: 0x800080 } );
+			const cube1 = new THREE.Mesh( geometry1, material1 );
+			scene.add( cube1 );
+
+			cube1.position.x=-5
+			scene.add(cube1);
+
+
+			const geometry2 = new THREE.BoxGeometry( 1, 1, 1 );
+			const material2 = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
+			const cube2 = new THREE.Mesh( geometry2, material2 );
+			scene.add( cube2 ); 
+
+			camera.position.z = 5;
+			cube2.position.x=5
+			scene.add(cube2);
+
+			function animate() {
+				requestAnimationFrame( animate );
+
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+				cube1.rotation.x += 0.02;
+				cube1.rotation.y += 0.02;
+				cube2.rotation.x += 0.03;
+				cube2.rotation.y += 0.03;
+
+				renderer.render( scene, camera );
+			};
+
+			animate();
+		</script>
+	</body>
+</html>
